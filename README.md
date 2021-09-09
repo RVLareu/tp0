@@ -54,22 +54,26 @@ El *else* debería haber estado en la misma linea que el } que cierra el bloque 
 
 Las lineas deberian tener como máximo 80 caracteres
 
-2. <br> ![Captura errores generación paso1](/errorGeneracionPaso1.png)
+2. <br> ![Captura errores generación paso1](/errorGeneracionPaso1.png) <br> Al poner el flag -c se genera codigo objeto sin linkear (precompilación + compilación). De esta manera ya sabemos que son errores de compilación y no de linkeo. Lo que ocure es que el compilador no tiene la información suficiente acerca de los tipos y nombres de funciones que aparecen en el código, de ahi que indicia *unkown type* y definición implicita. Incluso podrían ser errores de tipeo. Esto podría solucionarse indicandole al compilador que existe ese tipo y esas funciones, declarandolas al principio del archivo por ejemplo. Incluso no haria falta indicar que hacen las funciones, con solo asegurarle al compilador que existen alcanzaria. También hay que tener en cuenta que los errores viene luego de una linea en la que se indica que se generaba codigo objeto a partir de un .c, esta etapa corresponde al compilador, el linker justamente *linkea* los .o
 3. El sistema no reportó ningún *Warning* ya que el flag -Werror indica que todos los warnings son tratados como errores.
 
 
 ## Paso 2 - Errores de generación 2
 
-1. En el *main.c* se agregó `#include "paso2_wordscounter.h"`, se reemplazó `strcpy(filepath, argv[1]);` por  ` memcpy(filepath, argv[1], strlen(argv[1]) + 1);` y se colocó el *else* en la misma linea que el } previo
+1. En el *main.c* se agregó `#include "paso2_wordscounter.h"` con las declaraciones de tipos y funciones, se reemplazó `strcpy(filepath, argv[1]);` por  ` memcpy(filepath, argv[1], strlen(argv[1]) + 1);` y se colocó el *else* en la misma linea que el } previo. <br> En el *paso2_wordscounter.c* se modificó de tal manera que pase las normas de codificación pero se invirtió el orden de los include, donde ahora primero se incluye el *paso2_wordscounter.h* y luego las librerías necesarias. <br> El *paso2_wordscounter.h* no tuvo modificaciones.
 
 2. <br> ![verificacion de normas de programacion](/normasProgramacionPaso2.png)
-3. <br> ![Error generación de código](/errorGeneracionPaso2.png)
+3. <br> ![Error generación de código](/errorGeneracionPaso2.png) <br> El compilador lee los *#include* de arriba hacia abajo, por lo que al poner primero el .h y luego las librerías que precisa, arrojará los errores de tipo desconocido, tanto para *size_t* como para *FILE*. <br> Los errores en *words_counter_getwords* vienen de ... <br> Finalmente, el compilador no reconoce a la función *malloc* ya que ni se encuentra definida por el programador como una funcion propia, ni se incluyó la librería *stdlib.h* que es quien la contiene.
 
 ## Paso 3 - Errores de generación 3
-1.
-2. <br> ![Error generación de codigo](/errorGeneracionPaso3.png)
+1. En el *paso3_wordscounter.c* se agregó un *include* con *stdlib.h* y en *paso3_wordscounter.c* se agregaron *includes* para *string.h* y *stdio.h*
+2. <br> ![Error generación de codigo](/errorGeneracionPaso3.png) El mensaje de error se da al momento del *linkear* *paso3_wordscounter.o* y *paso3_main.o*. Esto se da porque la función *wordscounter_destroy* es invocada en *paso3_main.c*, declarada en *paso3_wordscounter.h* pero no implementada en *paso3_wordscounter.c*
 ## Paso 4
-
+1. Se agregó la implementación de *wordscounter_destroy* en *paso3_wordscounter.c*
+2. ![Tda](/resultadoTdaValgrindPaso4.png)
+3. ![Long Filename](/resultadoLongFileNameValgrindPaso4.png)
+4. strncpy
+5. buffer overflow y segmentation fault
 ## Paso 5
 ## Paso 6
 ## Paso 7 
