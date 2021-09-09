@@ -3,7 +3,7 @@
 * Vázquez Lareu, Román
 * 100815
 
-## Paso 0
+## Paso 0 - Entorno de trabajo
 
 1. <br> ![Captura con y sin Valgrind](/valgrind.png)
 2. *Valgrind* sirve para debuggear, ayudando a detectar problemas en el manejo de memoria y de threading. La opción mas importante es la de seleccionar el tool: uno posible y a su vez el más común que viene por default es la de memcheck, que indica que toda la memoria allocada sea debidamente liberada. Según la documentación, otro toolname popular es cachegrind, que indica todo lo referido a la memoria cache en la ejecución del programa (referencias y misses tanto de datos como de instrucciones). En cuanto a opciones otras posibles son -q (solo imprime errores de mensaje), -v (imprime información adicional), --vgdb=yes (permite debuggear utilizando GDB), entre otras.
@@ -12,7 +12,7 @@
 5.
 
 
-## Paso 1
+## Paso 1 - Errores de generación y normas de programación
 
 1. <br> ![Captura errores estilo paso1](/errorEstiloPaso1.png)
 
@@ -32,7 +32,7 @@ El *else* debería haber estado en la misma linea que el } que cierra el bloque 
 |------------ | -------------|
 |<pre lang="C"> else if (state == STATE_IN_WORD) { </pre>| <pre lang="C"> } else if (state == STATE_IN_WORD) { </pre> |
 
-Debería haber un espacio previo al ( del if
+Debería haber un espacio previo al ( del *if*
 |Incorrecto | Correcto|
 |------------ | -------------|
 |<pre lang="C"> if(strchr(delim_words, c) != NULL) { </pre> | <pre lang="C"> if (strchr(delim_words, c) != NULL) { </pre>|
@@ -58,9 +58,19 @@ Las lineas deberian tener como máximo 80 caracteres
 3. El sistema no reportó ningún *Warning* ya que el flag -Werror indica que todos los warnings son tratados como errores.
 
 
-## Paso 2
+## Paso 2 - Errores de generación 2
 
 1. En el *main.c* se agregó `#include "paso2_wordscounter.h"`, se reemplazó `strcpy(filepath, argv[1]);` por  ` memcpy(filepath, argv[1], strlen(argv[1]) + 1);` y se colocó el *else* en la misma linea que el } previo
 
 2. <br> ![verificacion de normas de programacion](/normasProgramacionPaso2.png)
 3. <br> ![Error generación de código](/errorGeneracionPaso2.png)
+
+## Paso 3 - Errores de generación 3
+1.
+2. <br> ![Error generación de codigo](/errorGeneracionPaso3.png)
+## Paso 4
+
+## Paso 5
+## Paso 6
+## Paso 7 
+## Paso 8
