@@ -15,5 +15,8 @@
 ## Paso 1
 
 1.![Captura errores estilo paso1](/errorEstiloPaso1.png)
+Deberia haber un espacio entre el *while* y el paréntesis que abre la expresión a evaluar.
+    while(state != STATE_FINISHED);
+  
 2.![Captura errores generación paso1](/errorGeneracionPaso1.png)
 3.
