@@ -15,8 +15,52 @@
 ## Paso 1
 
 1.![Captura errores estilo paso1](/errorEstiloPaso1.png)
+
+
 Deberia haber un espacio entre el *while* y el paréntesis que abre la expresión a evaluar.
-    while(state != STATE_FINISHED);
-  
+|Incorrecto | Correcto|
+|------------ | -------------|
+|<pre lang="C"> while(state != STATE_FINISHED); </pre>|<pre lang="C"> while (state != STATE_FINISHED);</pre>|
+
+El espaciado dentro de los paréntesis debería ser consistente a izquierda y a derecha. Además deberia haber a lo sumo un espacio a cada lado. En este caso hay dos a iquierda y ninguno a derecha. Los operadores siempre van rodeados de espacios. 
+|Incorrecto | Correcto|
+|------------ | -------------|
+|<pre lang="C"> if (  c == EOF) { </pre> | <pre lang="C"> if (c == EOF) { </pre>|
+
+El *else* debería haber estado en la misma linea que el } que cierra el bloque previo. Además, si tiene una llave a derecha o izquierda debería estar la correspondiente del lado opuesto.
+|Incorrecto | Correcto|
+|------------ | -------------|
+|<pre lang="C"> else if (state == STATE_IN_WORD) { </pre>| <pre lang="C"> } else if (state == STATE_IN_WORD) { </pre> |
+
+Debería haber un espacio previo al ( del if
+|Incorrecto | Correcto|
+|------------ | -------------|
+|<pre lang="C"> if(strchr(delim_words, c) != NULL) { </pre> | <pre lang="C"> if (strchr(delim_words, c) != NULL) { </pre>|
+
+Los punto y coma no deberían llevar un espacio antes de su utilización
+|Incorrecto | Correcto|
+|------------ | -------------|
+|<pre lang="C"> return next_state ; </pre> | <pre lang="C"> return next_state; </pre>|
+
+Usar *snprintf* en vez de *strcpy*
+|Incorrecto | Correcto|
+|------------ | -------------|
+|<pre lang="C"> strcpy(filepath, argv[1]); </pre> | <pre lang="C"> snprintf(filepath, argv[1]); </pre>|
+
+El *else* debería haber estado en la misma linea que el } que cierra el bloque previo. Además, si tiene una llave a derecha o izquierda debería estar la correspondiente del lado opuesto.
+|Incorrecto | Correcto|
+|------------ | -------------|
+|<pre lang="C"> else {  </pre>| <pre lang="C"> } else { </pre> |
+
+Las lineas deberian tener como máximo 80 caracteres
+
 2.![Captura errores generación paso1](/errorGeneracionPaso1.png)
+3. El sistema no reportó ningún *Warning* ya que el flag -Werror indica que todos los warnings son tratados como errores.
+
+
+## Paso 2
+
+1. En el *main.c* se agregó `#include "paso2_wordscounter.h"`, se reemplazó `strcpy(filepath, argv[1]);` por  ` memcpy(filepath, argv[1], strlen(argv[1]) + 1);` y se colocó el *else* en la misma linea que el } previo
+
+2.
 3.
