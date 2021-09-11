@@ -70,11 +70,15 @@ Las lineas deberian tener como máximo 80 caracteres
 2. <br> ![Error generación de codigo](/errorGeneracionPaso3.png) El mensaje de error se da al momento del *linkear* *paso3_wordscounter.o* y *paso3_main.o*. Esto se da porque la función *wordscounter_destroy* es invocada en *paso3_main.c*, declarada en *paso3_wordscounter.h* pero no implementada en *paso3_wordscounter.c*
 ## Paso 4
 1. Se agregó la implementación de *wordscounter_destroy* en *paso3_wordscounter.c*
-2. ![Tda](/resultadoTdaValgrindPaso4.png)
-3. ![Long Filename](/resultadoLongFileNameValgrindPaso4.png)
-4. strncpy
-5. buffer overflow y segmentation fault
+2. ![Tda](/resultadoTdaValgrindPaso4.png) <br>En la linea 14 de *paso4_main.c* se abre un archivo que luego no se cierra. <br> En la linea 24 se pierde memoria porque *wordscounter_process* internamente llama a *wordscounter_next_state()* que pide memoria con malloc pero no la libera
+3. ![Long Filename](/resultadoLongFileNameValgrindPaso4.png) <br> reporta un buffer overflow en la linea 13 de *paso4_main.c*, esto se da porque se le pasa a *memcpy* un buffer de tamaño insuficiente, entonces no lee la dirección completa
+4. *strncpy* a diferencia de *memcpy*  lee la cantidad indicada o hasta que encuentra un caracter nulo. En este caso no huebiese habido buffer overflow pero no se hubiese leido la dirección en su totalidad.
+5. *Segmentation fault* ocurre cuando se intenta acceder a una posición de memoria no permitida, *buffer overflow* ocurre cuando se almacena en un *buffer* mas información de la que puede hacerlo, escribiendo el excedente en memoria contigua no asignada para tal fin. Dado un *buffer overflow*, puede ocurrir un *segmentation fault*
 ## Paso 5
+1. en *paso5_main.c* se abre el archivo unicamente con *fopen*, sin ningún buffer del programa. En caso de que el input no sea por *stdin*, se cierra el archivo abierto. En *paso5_words_counter.c* ya no se pide memoria para los caracteres delimitadores, se resuelve sin la necesidad de *malloc*
+2. ![motivo Sercom fallan pruebas](/errorPruebasPaso5.png) <br> motivo
+3. cpat
+4. ![corrida single word gdb](/corridaGdbPaso5.png)*info functions* devuelve el nombre de todas las funciones definidas en el programa <br> *list worscounter_next_state* se posiciona en el principio de esta funcion e imprime desde alli las primeras 10 líneas, *list* imprime desde donde se este posicionado, las siguientes 10 líneas <br> *break 45* indica que se frene la ejecucion del programa en la linea 45 <br> *run input_single_word.txt* corre el programa con el input indicado. <br> *quit* sale de gdb.
 ## Paso 6
 ## Paso 7 
 ## Paso 8
