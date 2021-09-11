@@ -76,9 +76,12 @@ Las lineas deberian tener como máximo 80 caracteres
 5. *Segmentation fault* ocurre cuando se intenta acceder a una posición de memoria no permitida, *buffer overflow* ocurre cuando se almacena en un *buffer* mas información de la que puede hacerlo, escribiendo el excedente en memoria contigua no asignada para tal fin. Dado un *buffer overflow*, puede ocurrir un *segmentation fault*
 ## Paso 5
 1. en *paso5_main.c* se abre el archivo unicamente con *fopen*, sin ningún buffer del programa. En caso de que el input no sea por *stdin*, se cierra el archivo abierto. En *paso5_words_counter.c* ya no se pide memoria para los caracteres delimitadores, se resuelve sin la necesidad de *malloc*
-2. ![motivo Sercom fallan pruebas](/errorPruebasPaso5.png) <br> motivo
-3. cpat
-4. ![corrida single word gdb](/corridaGdbPaso5.png)*info functions* devuelve el nombre de todas las funciones definidas en el programa <br> *list worscounter_next_state* se posiciona en el principio de esta funcion e imprime desde alli las primeras 10 líneas, *list* imprime desde donde se este posicionado, las siguientes 10 líneas <br> *break 45* indica que se frene la ejecucion del programa en la linea 45 <br> *run input_single_word.txt* corre el programa con el input indicado. <br> *quit* sale de gdb.
+2. ![motivo Sercom fallan pruebas](/errorPruebasPaso5.png) <br> Las pruebas fallan dado que el valor esperado fue distinto al obtenido, esto lo indica Sercom mostrando las diferencias entre los esperado y obtenido
+3. ![hexdump single word](/hdPaso5.png) El último caracter es el nulo.
+4. ![corrida single word gdb](/corridaGdbPaso5.png)*info functions* devuelve el nombre de todas las funciones definidas en el programa <br> *list worscounter_next_state* se posiciona en el principio de esta funcion e imprime desde alli las primeras 10 líneas, *list* imprime desde donde se este posicionado, las siguientes 10 líneas <br> *break 45* indica que se frene la ejecucion del programa en la linea 45 <br> *run input_single_word.txt* corre el programa con el input indicado. <br> *quit* sale de gdb. <br> El debugger no se detuvo en la línea indicada porque no pasó por la misma. De lo contrario el resultado obtenido no hubiese sido 0. Al ingresar a *wordscounter_next_state* luego de terminar la primera palabra sale al ser *c* un EOF. Para verificar esto ultimo se usaron los comandos *print*, *next*, *break* y *step*
 ## Paso 6
+1. Se redefinió la constante error y los caracteres delimitadores como una constante. Además, se invirtió el orden en que se hacían las evaluaciones: ahora primero se evalúa el estado y luego se compara el carácter. Se agregó el caso entonces en que si *c == EOF* puede llegar a tener que sumarse una palabra depediendo del estado.
+2. ![entregas realizadas](/submissionPaso6.png)
+3. ![prueba single word local](/singleWordPaso6.png)
 ## Paso 7 
 ## Paso 8
