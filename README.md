@@ -85,3 +85,10 @@ Las lineas deberian tener como máximo 80 caracteres
 3. ![prueba single word local](/singleWordPaso6.png)
 ## Paso 7 
 ## Paso 8
+1. -l por listen, quiere decir que está escuchando a la espera de una conexion. -p sirve para indicar el puerto.
+2. ![netcat puerto en espera](/netcatScreen.png)
+3. El input de una consola es la salida en el primer netcat
+4. 3, ESTAB y uno LISTEN
+5. Tiburoncin indica la cantidad y los bytes enviados de A a B. Además indica si B los recibió (sync) o no (behind). Se relaciona con hexdump en que tiburoncin imprime algo muy similar a lo que se obtendria de hacer un hexdump de un archivo conteniendo lo enviado por A. *Man in the middle* porque toma los bytes enviados por A, los examina y deja que sigan hacia destino
+6. ![cat AtoB](/AtoB.png)
+  ![](/hexAtoB.png)
