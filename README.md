@@ -6,10 +6,10 @@
 ## Paso 0 - Entorno de trabajo
 
 1. <br> ![Captura con y sin Valgrind](/valgrind.png)
-2. *Valgrind* sirve para debuggear, ayudando a detectar problemas en el manejo de memoria y de threading. La opción mas importante es la de seleccionar el tool: uno posible y a su vez el más común que viene por default es la de memcheck, que indica que toda la memoria allocada sea debidamente liberada. Según la documentación, otro toolname popular es cachegrind, que indica todo lo referido a la memoria cache en la ejecución del programa (referencias y misses tanto de datos como de instrucciones). En cuanto a opciones otras posibles son -q (solo imprime errores de mensaje), -v (imprime información adicional), --vgdb=yes (permite debuggear utilizando GDB), entre otras.
-3. *sizeof()* devuelve el tamaño de un tipo de dato o expresión en bytes. el *sizeof(char)* devuelve 1 (byte) y el *sizeof(int)* devuelve 4 (bytes), aunque en el caso del int podría variar dependiendo de la arquitectura y del compilador.
-4. el *sizeof()* de un struct puede no ser igual a la suma de los *sizeof()* de cada uno de sus elementos. Cuando se hace el *sizeof()* del struct en su totalidad, se tiene en cuenta el padding, por lo que si el struct tiene un elemento char y uno int el *sizeof()* del struct será 8 (4 del int, 1 del char y 3 del padding del char). Ahora bien, al hacer la suma por separada el valor será 5 (4 del int y 1 del char) ya que no se tiene en cuenta el padding. En el caso de que el struct se encuentre formado únicamente por elementos de tipo int, no se daría esta diferencia.
-5.
+2. *Valgrind* sirve para debuggear, ayudando a detectar problemas en el manejo de memoria y de threading. La opción mas importante es la de seleccionar el tool: uno posible y a su vez el más común que viene por default es la de *memcheck*, que indica que toda la memoria allocada sea debidamente liberada. Según la documentación, otro toolname popular es *cachegrind*, que indica todo lo referido a la memoria cache en la ejecución del programa (referencias y misses tanto de datos como de instrucciones). En cuanto a otras opciones posibles son *-q* (solo imprime errores de mensaje), *-v* (imprime información adicional), *--vgdb=yes* (permite debuggear utilizando GDB), entre otras.
+3. *sizeof()* devuelve el tamaño de un tipo de dato o expresión en bytes. el *sizeof(char)* devuelve 1 (byte) y el *sizeof(int)* devuelve 4 (bytes), aunque en el caso del *int* podría variar dependiendo de la arquitectura y del compilador.
+4. el *sizeof()* de un struct puede no ser igual a la suma de los *sizeof()* de cada uno de sus elementos. Cuando se hace el *sizeof()* del struct en su totalidad, se tiene en cuenta el padding, por lo que si el struct tiene un elemento *char* y uno *int*, el *sizeof()* del struct será 8 (4 del *int*, 1 del *char* y 3 del padding del *char*). Ahora bien, al hacer la suma por separada el valor será 5 (4 del *int* y 1 del *char*) ya que no se tiene en cuenta el padding. En el caso de que el struct se encuentre formado únicamente por elementos de tipo *int*,o que el struct tenga el atribute *packed* no se daría esta diferencia (entre otros ejemplos).
+5.STDIN corresponde a la entrada estándar y es de lo que se alimentará el programa/comando, STDOUT y STDERR son de salida, el primero para la salida estándar del programa por la shell y el segundo en caso de error. El pipe concatena la salida estandar de uno con la entrada estandar de otro, de esta manera la salida de un proceso será el input del de la derecha del pipe. Con > se puede redireccionar la salida a, por ejemplo, un archivo de texto. Con < se puede indicar que el input provenga de un archivo en particular.
 
 
 ## Paso 1 - Errores de generación y normas de programación
@@ -45,7 +45,7 @@ Los punto y coma no deberían llevar un espacio antes de su utilización
 Usar *snprintf* en vez de *strcpy*
 |Incorrecto | Correcto|
 |------------ | -------------|
-|<pre lang="C"> strcpy(filepath, argv[1]); </pre> | <pre lang="C"> snprintf(filepath, argv[1]); </pre>|
+|<pre lang="C"> strcpy(); </pre> | <pre lang="C"> snprintf(); </pre>|
 
 El *else* debería haber estado en la misma linea que el } que cierra el bloque previo. Además, si tiene una llave a derecha o izquierda debería estar la correspondiente del lado opuesto.
 |Incorrecto | Correcto|
